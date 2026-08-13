@@ -87,9 +87,13 @@ function NotesPage() {
           className="grid gap-4 sm:grid-cols-[180px_1fr_auto] sm:items-end"
           onSubmit={(e) => {
             e.preventDefault();
-            if (topic.trim().length < 2) return toast.error("Please enter a topic");
+            if (topic.trim().length < 2) {
+              toast.error("Please enter a topic");
+              return;
+            }
             create.mutate();
           }}
+
         >
           <div>
             <Label htmlFor="subject">Subject</Label>
