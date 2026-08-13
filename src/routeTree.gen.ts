@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppChatRouteImport } from './routes/_app.chat'
 import { Route as AppNotesRouteImport } from './routes/_app.notes'
 import { Route as AppPlannerRouteImport } from './routes/_app.planner'
+import { Route as AppProgressRouteImport } from './routes/_app.progress'
 import { Route as AppQuizRouteImport } from './routes/_app.quiz'
 
 const IndexRoute = IndexRouteImport.update({
@@ -46,6 +47,11 @@ const AppPlannerRoute = AppPlannerRouteImport.update({
   path: '/planner',
   getParentRoute: () => AppRoute,
 } as any)
+const AppProgressRoute = AppProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppQuizRoute = AppQuizRouteImport.update({
   id: '/quiz',
   path: '/quiz',
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/chat': typeof AppChatRoute
   '/notes': typeof AppNotesRoute
   '/planner': typeof AppPlannerRoute
+  '/progress': typeof AppProgressRoute
   '/quiz': typeof AppQuizRoute
 }
 export interface FileRoutesByTo {
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/chat': typeof AppChatRoute
   '/notes': typeof AppNotesRoute
   '/planner': typeof AppPlannerRoute
+  '/progress': typeof AppProgressRoute
   '/quiz': typeof AppQuizRoute
 }
 export interface FileRoutesById {
@@ -76,13 +84,15 @@ export interface FileRoutesById {
   '/_app/chat': typeof AppChatRoute
   '/_app/notes': typeof AppNotesRoute
   '/_app/planner': typeof AppPlannerRoute
+  '/_app/progress': typeof AppProgressRoute
   '/_app/quiz': typeof AppQuizRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/chat' | '/notes' | '/planner' | '/quiz'
+  fullPaths:
+    '/' | '/auth' | '/chat' | '/notes' | '/planner' | '/progress' | '/quiz'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/chat' | '/notes' | '/planner' | '/quiz'
+  to: '/' | '/auth' | '/chat' | '/notes' | '/planner' | '/progress' | '/quiz'
   id:
     | '__root__'
     | '/'
@@ -91,6 +101,7 @@ export interface FileRouteTypes {
     | '/_app/chat'
     | '/_app/notes'
     | '/_app/planner'
+    | '/_app/progress'
     | '/_app/quiz'
   fileRoutesById: FileRoutesById
 }
@@ -144,6 +155,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppPlannerRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/progress': {
+      id: '/_app/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof AppProgressRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/quiz': {
       id: '/_app/quiz'
       path: '/quiz'
@@ -158,6 +176,7 @@ interface AppRouteChildren {
   AppChatRoute: typeof AppChatRoute
   AppNotesRoute: typeof AppNotesRoute
   AppPlannerRoute: typeof AppPlannerRoute
+  AppProgressRoute: typeof AppProgressRoute
   AppQuizRoute: typeof AppQuizRoute
 }
 
@@ -165,6 +184,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppChatRoute: AppChatRoute,
   AppNotesRoute: AppNotesRoute,
   AppPlannerRoute: AppPlannerRoute,
+  AppProgressRoute: AppProgressRoute,
   AppQuizRoute: AppQuizRoute,
 }
 
